@@ -1,6 +1,6 @@
 # Repository Parser
 
-Ruby script that parses repositories which contain Dockerfiles from .cvs file and uses java tool to produces .json file in output.
+Ruby script that parses repositories and folder which contain Dockerfiles to analyze them.
 
 ## Getting Started
 
@@ -23,12 +23,17 @@ What things you need to install the software and how to install them:
 
 There are different possibilities on how the script can be executed:
 
-1. Analyze a specified folder
-   * Arguments: -dir {folder path}
-   * Example: `ruby repository_parser.rb -dir path/to/folder`
-2. Analyze GitHub repositories from .csv file that contains repo_path 
+1. Analyze a specified folder that contains dockerfiles and save results into a json file
+   * Arguments: -dir {folder path} 0 -repositoryToJson
+   * Hint: you find the json files in a new folder named "json"
+   * Example: `ruby repository_parser.rb -dir path/to/folder 0 -repositoryToJson`
+2. Analyze GitHub repositories from .csv file that contains repo_path and save results into a json file
     * Arguments: -repo "-" {number of repositories to parse}
+    * Hint: you find the json files in a new folder named "json"
     * Example: `ruby repository_parser.rb -repo - 5`
+3. Analyze a specified folder that contains dockerfiles and save results into a mongodb database
+    * Arguments: -dir {folder path} 0 --dbmongo {host} {port} --login {user} {password}
+    * Example: `ruby repository_parser.rb -repo -dir path/to/folder 0 --dbmongo <host> <port> --login <user> <pwd>`
 
 ## Authors
 
