@@ -17,7 +17,8 @@ regex = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()
 def detect_lang(comment):
     lang = None
     try:
-        lang = langid.classify(comment)
+        # classify method return lang and accuracy, with 0 index take only language of string
+        lang = langid.classify(comment)[0]
     except:
         # can not detect language
         logging.warn(traceback.format_exc())
@@ -37,7 +38,7 @@ def main():
                 logging.info('processing row: ' + row['dockerfile_sha1'])
                 comment = row['comment_clean'].lower()
                 words = word_tokenize(comment)
-                if (detect_lang(comment) == 'en' and len(words) >= 2 and comment[0].isalpha()):
+                if (detect_lang(comment[:500]) == 'en' and len(words) >= 2 and comment[0].isalpha()):
 
                     url = re.findall(regex, comment)
 
