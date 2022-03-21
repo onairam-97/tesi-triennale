@@ -33,6 +33,9 @@ es_mapping = {
             "dockerfile_sha1": {
                 "type": "keyword"
             },
+            "instruction": {
+                "type": "text"
+            },
             "comment_clean": {
                 "type": "text"
             },
