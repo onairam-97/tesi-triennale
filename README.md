@@ -3,7 +3,7 @@
 In this repository we describe the whole process of obtaining a dataset of code-comment pairs used for the training phase of a Natural Language Source Code Generation system.
 
 ## Getting Started
-To obtaining the datasrt you need to run the scripts in the same order as described in section below.
+To obtaining the dataset you need to run the scripts in the same order as described in section below.
 
 ### Script
 
