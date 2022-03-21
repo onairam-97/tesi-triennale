@@ -1,25 +1,15 @@
-# Repository Parser
+# Build dataset
 
-Ruby script that parses repositories and folder which contain Dockerfiles to analyze them.
+In this repository we describe the whole process of obtaining a dataset of code-comment pairs used for the training phase of a Natural Language Source Code Generation system.
 
 ## Getting Started
+To obtaining the datasrt you need to run the scripts in the same order as described in section below.
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+### Script
 
-Run:
+#### 1. Repository_parser
 
-```
-git clone https://github.com/onairam-97/repository_parser.git
-```
-### Prerequisites
-
-What things you need to install the software and how to install them:
-
-* java sdk ditribution: corretto-1.8
-* ruby version: 2.7.2p137
-* maven version: Apache Maven 3.6.3
-
-## Running instructions
+This script extract data from Dockerfile.
 
 There are different possibilities on how the script can be executed:
 
@@ -34,6 +24,31 @@ There are different possibilities on how the script can be executed:
 3. Analyze a specified folder that contains dockerfiles and save results into a mongodb database
     * Arguments: -dir {folder path} 0 --dbmongo {host} {port} --login {user} {password}
     * Example: `ruby repository_parser.rb -repo -dir path/to/folder 0 --dbmongo <host> <port> --login <user> <pwd>`
+
+#### 2. Export_data
+
+This script establishes a connection wtih MongoDB and create a code-comment pairs from the information extracted in the previous step and save result in a .csv file.
+
+#### 3. Clear_data
+
+This script remove lines with any empty field and lines that starts with Docker instruction from .csv file. Also remove the lines that starts with Docker instruction in a multilines comment.
+
+#### 4. Data_filter
+
+This script applies various heuristics to obtain the final dataset.
+
+The heuristics applied in the script are:
+
+1. Removes the code-comment pairs whose comment is not in english.
+2. Removes the code-comment pairs whose comment is not composed of at least two words.
+3. Removes the code-comment pairs whose comment contains a percentage of special characters greater than 7%.
+4. Removes the code-comment pairs whose comment do not starts with an alphabetic character.
+5. Removes the code-comment pairs whose comment contains link.
+6. Removes the code-comment pairs whose comment contains the words "todo", "license" and "copyright".
+
+#### 5. Insert_elastic
+
+This script uploads the data obtained in the previous step to Elasticsearch.
 
 ## Authors
 
