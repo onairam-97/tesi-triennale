@@ -7,7 +7,7 @@ To obtaining the dataset you need to run the scripts in the same order as descri
 
 ### Script
 
-#### 1. Repository_parser
+#### 1. Dockerfile_parser
 
 This script extract data from Dockerfile.
 
@@ -16,14 +16,14 @@ There are different possibilities on how the script can be executed:
 1. Analyze a specified folder that contains dockerfiles and save results into a json file
    * Arguments: -dir {folder path} 0 -repositoryToJson
    * Hint: you find the json files in a new folder named "json"
-   * Example: `ruby repository_parser.rb -dir path/to/folder 0 -repositoryToJson`
+   * Example: `ruby dockerfile_parser.rb -dir path/to/folder 0 -repositoryToJson`
 2. Analyze GitHub repositories from .csv file that contains repo_path and save results into a json file
     * Arguments: -repo "-" {number of repositories to parse}
     * Hint: you find the json files in a new folder named "json"
-    * Example: `ruby repository_parser.rb -repo - 5`
+    * Example: `ruby dockerfile_parser.rb -repo - 5`
 3. Analyze a specified folder that contains dockerfiles and save results into a mongodb database
     * Arguments: -dir {folder path} 0 --dbmongo {host} {port} --login {user} {password}
-    * Example: `ruby repository_parser.rb -repo -dir path/to/folder 0 --dbmongo <host> <port> --login <user> <pwd>`
+    * Example: `ruby dockerfile_parser.rb -repo -dir path/to/folder 0 --dbmongo <host> <port> --login <user> <pwd>`
 
 #### 2. Export_data
 
